@@ -1,0 +1,17 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Customer";
+}
+
+@{
+    
+
+    <h1>@Model.Name</h1>
+    <p>@Model.MembershipType.Name</p>
+    if (Model.Birthday != null)
+    {
+       
+        <p>@Model.Birthday?.ToShortDateString()</p>
+                                               
+    }
+}

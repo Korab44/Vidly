@@ -1,0 +1,33 @@
+﻿@model List<Customer>
+
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>Customers</h2>
+@if (!Model.Any())
+{
+    <p>We don't have any customer yet.</p>
+}
+else
+{
+    <table class="table table-brodered table-dark table-hover">
+        <thead>
+            <tr>
+                <th><strong>Customer</strong></th>
+                <th><strong>Membership</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var customer in Model)
+            {
+                <tr>
+                    <td><a class="text-light" asp-controller="Home" asp-action="Details" asp-route-id="@customer.Id">@customer.Name</a></td>
+                    <td>@customer.MembershipType.Name</td>
+                    </tr>
+            }
+           
+        </tbody>
+    </table>
+}
