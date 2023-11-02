@@ -55,7 +55,6 @@ namespace Vidly.Controllers
         {
             if (movie.Movies.Id == 0)
             {
-              
                 _appDbContext.Movies.Add(movie.Movies);
             } else
             {

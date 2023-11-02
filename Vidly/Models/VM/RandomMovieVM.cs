@@ -4,6 +4,6 @@
     {
         public Movie Movies { get; set; }
         public List<Customer> Customers { get; set; }
-        public bool isNewMovie { get; set; }
+        //public bool isNewMovie { get; set; }
     }
 }
