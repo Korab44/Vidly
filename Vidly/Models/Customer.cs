@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Runtime.InteropServices.JavaScript;
 using Vidly.Migrations;
 
@@ -11,6 +12,7 @@ namespace Vidly.Models
         public bool IsSubscribedToNewsLetter{ get; set; }
         public MembershipType MembershipType { get; set; }
         public byte MembershipTypeId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? Birthday { get; set; }
       
     }

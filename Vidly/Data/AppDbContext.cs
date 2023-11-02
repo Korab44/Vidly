@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Models;
+using Vidly.Models.VM;
 
 namespace Vidly.Data
 {
@@ -27,6 +28,8 @@ namespace Vidly.Data
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+     
         
     }
 }

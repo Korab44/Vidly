@@ -16,8 +16,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\_Projektet\Vidly\Vidly
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/_Projektet/Vidly/Vidly/Views/Home/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWxzLmNzaHRtbA==
+[C:/_Projektet/Vidly/Vidly/Views/Home/CustomerForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDdXN0b21lckZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/_Projektet/Vidly/Vidly/Views/Home/Index.cshtml]
@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/_Projektet/Vidly/Vidly/Views/Home/Movies.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNb3ZpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_Projektet/Vidly/Vidly/Views/Movies/CustomFormMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEN1c3RvbUZvcm1Nb3ZpZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/_Projektet/Vidly/Vidly/Views/Movies/Details.cshtml]

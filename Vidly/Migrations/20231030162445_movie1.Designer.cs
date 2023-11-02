@@ -12,8 +12,8 @@ using Vidly.Data;
 namespace Vidly.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231030093727_Movie1")]
-    partial class Movie1
+    [Migration("20231030162445_movie1")]
+    partial class movie1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,9 +240,6 @@ namespace Vidly.Migrations
                     b.Property<byte>("MembershipTypeId")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -250,8 +247,6 @@ namespace Vidly.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MembershipTypeId");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Customers");
                 });
@@ -367,15 +362,7 @@ namespace Vidly.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Vidly.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("MembershipType");
-
-                    b.Navigation("Movie");
                 });
 #pragma warning restore 612, 618
         }
