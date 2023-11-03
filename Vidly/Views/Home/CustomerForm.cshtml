@@ -4,26 +4,29 @@
 @{
     ViewData["Title"] = "New Customer";
 }
-
+<div asp-validation-summary="All" class="text-danger" placeholder="Please fix the following Errors"></div>
 <form asp-controller="home" asp-action="Save">
     <div class="form-group">
         <label asp-for="Customers.Name"></label>
         <input class="form-control mb-3" asp-for="Customers.Name" />
-
-    </div>
-    <div class="form-group">
-        <label asp-for="Customers.Birthday">Date of Birth</label>
-        <input class="form-control mb-3" asp-for="Customers.Birthday" />
+        <span asp-validation-for="Customers.Name" class="text-danger"></span>
     </div>
     <div class="form-group  mb-3">
         <label asp-for="Customers.MembershipTypeId">Membership Type</label>
         @Html.DropDownListFor(m => m.Customers.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type",new { @class = "form-control mb-3" })
+        <span asp-validation-for="Customers.MembershipTypeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customers.Birthday">Date of Birth</label>
+        <input class="form-control mb-3" asp-for="Customers.Birthday" />
+        <span asp-validation-for="Customers.Birthday" class="text-danger"></span>
     </div>
     <div class="form-group  mb-3">
         <input type="checkbox" asp-for="Customers.IsSubscribedToNewsLetter" class="btn-check" id="btncheck2" autocomplete="off">
         <label class="btn btn-outline-primary" for="btncheck2">Subscribed To NewsLetter?</label>
     </div>
     <input class="form-control" asp-for="Customers.Id" hidden />
+    @Html.AntiForgeryToken();
     <button type="submit" class="btn btn-primary">Save</button>
 @*     <div class="form-group">
         <div class="dropdown">
@@ -41,3 +44,8 @@
 
     </div> *@
 </form>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

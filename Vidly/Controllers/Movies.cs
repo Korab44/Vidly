@@ -51,24 +51,39 @@ namespace Vidly.Controllers
             }
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Save(RandomMovieVM movie)
+
         {
-            if (movie.Movies.Id == 0)
+            if (!ModelState.IsValid)
             {
-                _appDbContext.Movies.Add(movie.Movies);
-            } else
+                
+                var viewModel = new RandomMovieVM
+                {
+                    Movies = movie.Movies
+                };
+                return View("CustomFormMovie", viewModel);
+            }
+            else
             {
-               
-                var existingMovie = _appDbContext.Movies.Single(x => x.Id == movie.Movies.Id);
-            
-                    existingMovie.Name = movie.Movies.Name; 
+                if (movie.Movies.Id == 0)
+                {
+                    _appDbContext.Movies.Add(movie.Movies);
+                }
+                else
+                {
+
+                    var existingMovie = _appDbContext.Movies.Single(x => x.Id == movie.Movies.Id);
+
+                    existingMovie.Name = movie.Movies.Name;
                     existingMovie.MovieGenre = movie.Movies.MovieGenre;
                     existingMovie.ReleaseDateTime = movie.Movies.ReleaseDateTime;
                     existingMovie.StockNumber = movie.Movies.StockNumber;
-                _appDbContext.Movies.Update(existingMovie);
+                    _appDbContext.Movies.Update(existingMovie);
+                }
+                _appDbContext.SaveChanges();
+                return RedirectToAction("Index");
             }
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index");
         }
         //public IActionResult Random()
         //{
