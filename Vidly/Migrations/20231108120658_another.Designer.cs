@@ -12,8 +12,8 @@ using Vidly.Data;
 namespace Vidly.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231031124124_datatypeDate")]
-    partial class datatypeDate
+    [Migration("20231108120658_another")]
+    partial class another
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

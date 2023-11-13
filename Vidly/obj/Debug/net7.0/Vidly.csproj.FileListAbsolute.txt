@@ -89,3 +89,10 @@ C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dl
 C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
 C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\_Projektet\Vidly\Vidly\obj\Debug\net7.0\Vidly.MvcApplicationPartsAssemblyInfo.cs
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\System.Web.Http.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\_Projektet\Vidly\Vidly\bin\Debug\net7.0\AutoMapper.dll

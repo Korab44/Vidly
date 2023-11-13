@@ -13,13 +13,13 @@
     </div>
     <div class="form-group  mb-3">
         <label asp-for="Customers.MembershipTypeId">Membership Type</label>
-        @Html.DropDownListFor(m => m.Customers.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type",new { @class = "form-control mb-3" })
+        @Html.DropDownListFor(m => m.Customers.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type",new { @class = "form-control mb-3", id = "Customers_MembershipTypeId"   } )
         <span asp-validation-for="Customers.MembershipTypeId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Customers.Birthday">Date of Birth</label>
-        <input class="form-control mb-3" asp-for="Customers.Birthday" />
-        <span asp-validation-for="Customers.Birthday" class="text-danger"></span>
+        <input id="birthday" class="form-control mb-3" asp-for="Customers.Birthday" />
+        <span id="errorContainer" asp-validation-for="Customers.Birthday" class="text-danger"></span>
     </div>
     <div class="form-group  mb-3">
         <input type="checkbox" asp-for="Customers.IsSubscribedToNewsLetter" class="btn-check" id="btncheck2" autocomplete="off">
@@ -27,25 +27,61 @@
     </div>
     <input class="form-control" asp-for="Customers.Id" hidden />
     @Html.AntiForgeryToken();
-    <button type="submit" class="btn btn-primary">Save</button>
-@*     <div class="form-group">
-        <div class="dropdown">
-            <button class="btn btn-secondary drowdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                Dropdown button>
-                Select your subscription
-            </button>
-            <ul class="dropdown-menu">
-                @foreach (var membershipType in Model.MembershipTypes)
-                {
-                    <li><a>@membershipType.Name</a></li>
-                }
-            </ul>
-        </div>
+    <button id="saveButton" type="submit" class="btn btn-primary">Save</button>
+    @*     <div class="form-group">
+    <div class="dropdown">
+    <button class="btn btn-secondary drowdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+    Dropdown button>
+    Select your subscription
+    </button>
+    <ul class="dropdown-menu">
+    @foreach (var membershipType in Model.MembershipTypes)
+    {
+    <li><a>@membershipType.Name</a></li>
+    }
+    </ul>
+    </div>
 
     </div> *@
 </form>
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
+
+    <script>
+        debugger
+        var saveButton = document.getElementById("saveButton");
+        saveButton.addEventListener("click", function (event) {
+            var birthday = document.getElementById("birthday").value;
+            var membershipTypeId = document.getElementById("Customers_MembershipTypeId").value;
+            var errorContainer = document.getElementById("errorContainer");
+
+            if (membershipTypeId == "1" || membershipTypeId == "0") {
+                return true;
+            } else if (membershipTypeId == "2" || membershipTypeId == "3" || membershipTypeId == "4") {
+                var hasErrors = false;
+                if (!birthday) {
+                    errorContainer.innerHTML = "Please enter a birthday";
+                    hasErrors = true;
+                }
+
+                var today = new Date();
+                var customerBirthday = new Date(birthday);
+                var age = today.getFullYear() - customerBirthday.getFullYear();
+
+                if (age <= 18) {
+                    errorContainer.innerHTML = "Customer should be at least 18 years old to go on a membership";
+                    hasErrors = true;
+                }
+            }
+
+            if (hasErrors) {
+                event.preventDefault();
+            } else {
+                document.forms[0].submit();
+            }
+        });
+    </script>
+
 }

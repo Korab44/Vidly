@@ -5,13 +5,14 @@ using Vidly.Data;
 using Vidly.Models;
 using Vidly.Models.VM;
 using Vidly.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Vidly.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
         {
@@ -24,54 +25,68 @@ namespace Vidly.Controllers
             _appDbContext.Dispose();
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var customer = _appDbContext.Customers.Include(m => m.MembershipType).ToList();
             return View(customer);
         }
-        public IActionResult New() 
+        public ActionResult New()
         {
             var membereshipType = _appDbContext.MembershipTypes.ToList();
             var viewModel = new CustomerFormVM
             {
+                Customers = new Customer(),
                 MembershipTypes = membereshipType
             };
             return View("CustomerForm", viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(CustomerFormVM model) 
+        public IActionResult Save(CustomerFormVM model)
+        {
+            var customer = model.Customers; // Retrieve the customer object from the model
+            try
+            {   
+
+                if (customer.Id == 0)
+                {
+                        _appDbContext.Customers.Add(customer);
+                }
+                else
+                {
+                    var customerInDb = _appDbContext.Customers.Single(c => c.Id == customer.Id);
+                    customerInDb.Name = customer.Name;
+
+                    customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                    customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+                    customerInDb.Birthday = customer.Birthday;
+
+                    _appDbContext.Customers.Update(customerInDb);
+                }
+                
+                _appDbContext.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
             {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new CustomerFormVM
+                var modelVM = new CustomerFormVM
                 {
                     Customers = model.Customers,
-                    MembershipTypes = _appDbContext.MembershipTypes.ToList(),
+                    MembershipTypes = _appDbContext.MembershipTypes.ToList()
                 };
 
-                return View("CustomerForm", viewModel);
+
+                return View("CustomerForm", modelVM);
+                
             }
-            if (model.Customers.Id == 0) { 
-            _appDbContext.Customers.Add(model.Customers);
-            } else
-            {
-                var customer = _appDbContext.Customers.Single(c => c.Id == model.Customers.Id);
-                customer.Name = model.Customers.Name;
-                customer.Birthday = model.Customers.Birthday;
-                customer.MembershipTypeId = model.Customers.MembershipTypeId;
-                customer.IsSubscribedToNewsLetter = model.Customers.IsSubscribedToNewsLetter;
-                _appDbContext.Customers.Update(customer);
-            }
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index", "Home");
         }
-        public IActionResult Edit(int id)
+
+        public ActionResult Edit(int id)
         {
             var customer = _appDbContext.Customers
             .FirstOrDefault(c => c.Id == id);
 
-            var viewModel= new CustomerFormVM()
+            var viewModel = new CustomerFormVM()
             {
                 Customers = customer,
                 MembershipTypes = _appDbContext.MembershipTypes.ToList()
@@ -94,7 +109,7 @@ namespace Vidly.Controllers
         //    _appDbContext.SaveChanges();
         //    return RedirectToAction("Index", "Home");
         //}
-        public IActionResult Movies()
+        public ActionResult Movies()
         {
             return View();
         }

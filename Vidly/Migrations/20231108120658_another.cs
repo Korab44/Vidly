@@ -5,7 +5,7 @@
 namespace Vidly.Migrations
 {
     /// <inheritdoc />
-    public partial class datatypeDate1 : Migration
+    public partial class another : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -15,6 +15,10 @@ namespace Vidly.Data
          
     }
 
+        public AppDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -23,13 +27,14 @@ namespace Vidly.Data
             {
                 entity.HasKey(login => new { login.LoginProvider, login.ProviderKey });
             });
-        
-    }
+      
+
+        }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
-     
-        
+
+
     }
 }

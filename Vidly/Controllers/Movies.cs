@@ -34,14 +34,14 @@ namespace Vidly.Controllers
         public IActionResult Edit(int id)
         {
             var movie = _appDbContext.Movies.FirstOrDefault(c => c.Id == id);
-         
+
             if (movie != null)
             {
                 var viewModel = new RandomMovieVM
                 {
                     Movies = movie,
-                   
-            };
+
+                };
                 ViewBag.Messages = "Edit Movie";
                 return View("CustomFormMovie", viewModel);
             }
@@ -55,16 +55,7 @@ namespace Vidly.Controllers
         public IActionResult Save(RandomMovieVM movie)
 
         {
-            if (!ModelState.IsValid)
-            {
-                
-                var viewModel = new RandomMovieVM
-                {
-                    Movies = movie.Movies
-                };
-                return View("CustomFormMovie", viewModel);
-            }
-            else
+            try
             {
                 if (movie.Movies.Id == 0)
                 {
@@ -83,6 +74,10 @@ namespace Vidly.Controllers
                 }
                 _appDbContext.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
             }
         }
         //public IActionResult Random()
