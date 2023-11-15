@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "Vidly/1.0.0": {
         "dependencies": {
+          "Bootbox.JS": "5.5.2",
           "Microsoft.AspNet.Mvc": "5.3.0",
           "Microsoft.AspNet.WebApi.Core": "5.3.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.13",
@@ -18,7 +19,10 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.13",
           "Newtonsoft.Json": "13.0.3",
           "System.Net.Http": "4.3.4",
-          "AutoMapper": "4.1.0"
+          "AutoMapper": "4.1.0",
+          "bootbox": "4.3.0",
+          "jQuery": "1.12.4",
+          "jquery.datatables": "1.10.15"
         },
         "runtime": {
           "Vidly.dll": {}
@@ -66,12 +70,34 @@
           }
         }
       },
+      "bootbox/4.3.0": {
+        "dependencies": {
+          "bootstrap": "3.0.0",
+          "jQuery": "1.12.4"
+        }
+      },
+      "Bootbox.JS/5.5.2": {
+        "dependencies": {
+          "jQuery": "1.12.4"
+        }
+      },
+      "bootstrap/3.0.0": {
+        "dependencies": {
+          "jQuery": "1.12.4"
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
           }
+        }
+      },
+      "jQuery/1.12.4": {},
+      "jquery.datatables/1.10.15": {
+        "dependencies": {
+          "jQuery": "1.12.4"
         }
       },
       "Microsoft.AspNet.Mvc/5.3.0": {
@@ -1163,12 +1189,47 @@
       "path": "azure.identity/1.7.0",
       "hashPath": "azure.identity.1.7.0.nupkg.sha512"
     },
+    "bootbox/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MVKVoAsvqK/wki+kvN1JQ/k9Oe8jkx8QmDyZzzfsrlr6Z1H/x8kS4ZicutrPqRXVLmRMQrnEO3I/K1/Lesel0A==",
+      "path": "bootbox/4.3.0",
+      "hashPath": "bootbox.4.3.0.nupkg.sha512"
+    },
+    "Bootbox.JS/5.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Uun5RlCR5a5faxEQU6PtsfrKjckTC/Eo9lmA6LnAUj3KR3s4dl13G9RTa6EgQnH4lKaYFTfWi+h0eW6XcCWnjA==",
+      "path": "bootbox.js/5.5.2",
+      "hashPath": "bootbox.js.5.5.2.nupkg.sha512"
+    },
+    "bootstrap/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d1JUd1ZjfbhGGTxjBSjCLIV+O//hZDcvI0hnaeTL3VHAD+6Z89vgPwV0K/nmPM4hZKq172iPV55lCSpohT6WmA==",
+      "path": "bootstrap/3.0.0",
+      "hashPath": "bootstrap.3.0.0.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "jQuery/1.12.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pIYtWlFI5PGlJVB8jm9H96pAQ27jQhA9sCxMeGweeC3ByQRaB8BwkIuGdTt4go3IEKTmmfRC2y5k0FLFizWDQg==",
+      "path": "jquery/1.12.4",
+      "hashPath": "jquery.1.12.4.nupkg.sha512"
+    },
+    "jquery.datatables/1.10.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9zRZ5zYafJHOwLU6sWoTM/agRx/dlu0HGQpGD/hEvqSEUJhSQjqJNTq77I97B+LCbh4eJrmNDS9PENiYY+0Isg==",
+      "path": "jquery.datatables/1.10.15",
+      "hashPath": "jquery.datatables.1.10.15.nupkg.sha512"
     },
     "Microsoft.AspNet.Mvc/5.3.0": {
       "type": "package",

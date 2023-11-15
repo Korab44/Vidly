@@ -23,3 +23,16 @@ body {
 .input-validation-error {
     border: 2px solid red;
 }
+.dataTables_length, #customers_filter {
+    margin-bottom: 20px;
+    line-height: 0px;
+}
+.container {
+    max-width: auto;
+}
+#customers td, #movies td {
+    padding: 1.5rem;
+}
+
+
+

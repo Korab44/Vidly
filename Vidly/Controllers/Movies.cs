@@ -19,8 +19,8 @@ namespace Vidly.Controllers
         public IActionResult Index()
         {
 
-            var movie = _appDbContext.Movies.ToList();
-            return View(movie);
+    
+            return View();
         }
 
         // the commented method here in New method code is another method with boolean value to show different titles in the beggining of page 

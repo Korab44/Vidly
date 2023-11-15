@@ -87,7 +87,7 @@ namespace Vidly.Controllers.Api
 
             // DELETE /api/moviesapi/{id} Postman: Delete and Body - None
             [HttpDelete("{id}")]
-            public ActionResult<Movie> DeleteCustomer(int id)
+            public ActionResult<Movie> DeleteMovie(int id)
             {
                 var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
                 if (movieInDb == null)
