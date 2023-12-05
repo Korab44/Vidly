@@ -1,13 +1,18 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+﻿@using Microsoft.AspNetCore.Identity;
+@using Vidly.Models;
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Vidly</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-                
+        <div class="navbar-collapse collapse d-flex justify-content-between">
+            <ul class="navbar-nav d-flex justify-content-start">
                 <li class="nav-item">
                     <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Customer</a>
                 </li>
@@ -16,5 +21,55 @@
                 </li>
             </ul>
         </div>
-    </div>
+        @{
+            var userId = UserManager.GetUserId(User);
+            var user = await UserManager.FindByIdAsync(userId);
+            var fullName = user?.FullName ?? "Unknown"; // Use null conditional operator (?.) and null coalescing operator (??)
+        }
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <ul class="navbar-nav d-flex justify-content-end">
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning my-2 my-sm-0" asp-controller="Account" asp-action="LogIn">
+                        <i class="bi bi-box-arrow-in-right"></i>Log in
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning my-2 my-sm-0" asp-controller="Account" asp-action="Register">
+                        <i class="bi bi-person-plus"></i>Register
+                    </a>
+                </li>
+            </ul>
+        }
+        else
+        {
+
+
+            <li>
+                <a class="btn btn-outline-warning my-2 my-sm-0">
+                    <i class="bi bi-person-badge"></i> Hello @fullName
+                </a>
+            </li>
+
+
+
+        @*     @if (User.IsInRole("Admin"))
+            {
+                <li>
+                <a class="btn btn-outline-success my-2 my-sm-0" asp-controller="Account" asp-action="Users">
+                    <i class="bi bi-people">Users</i>
+                </a>
+                </li>
+            } *@
+
+
+            <span style="padding: 5px;"></span>
+            <form asp-controller="Account" asp-action="Logout">
+                <button class="btn btn-outline-danger my-2 m-sm-0">
+                    <i class="bi bi-box-arrow-in-right"></i>Log out
+                </button>
+            </form>
+        }
+
 </nav>

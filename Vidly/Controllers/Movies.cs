@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Vidly.Data;
 using Vidly.Migrations;
 using Vidly.Models;
+using Vidly.Models.Roles;
 using Vidly.Models.VM;
 
 
 namespace Vidly.Controllers
 {
+    //[Authorize(AuthenticationSchemes = "Cookies")]
+    
     public class Movies : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -15,14 +19,14 @@ namespace Vidly.Controllers
         {
             _appDbContext = appDbContext;
         }
-
+        
         public IActionResult Index()
         {
-
-    
-            return View();
+            if (User.IsInRole(UserRoles.Admin))
+                return View("List");
+             return View("ReadOnlyList");
         }
-
+        [Authorize(Roles = UserRoles.Admin, AuthenticationSchemes = "Cookies")]
         // the commented method here in New method code is another method with boolean value to show different titles in the beggining of page 
         public IActionResult New(/*RandomMovieVM movie*/)
         {

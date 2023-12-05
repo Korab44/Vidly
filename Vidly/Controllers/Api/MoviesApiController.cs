@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.Data;
 using Vidly.Dtos;
 using Vidly.Models;
+using Vidly.Models.Roles;
 
 namespace Vidly.Controllers.Api
 {
@@ -11,12 +13,14 @@ namespace Vidly.Controllers.Api
     [ApiController]
     public class MoviesApiController : ControllerBase
     {
+        [Authorize(Roles = UserRoles.Admin, AuthenticationSchemes = "Cookies")]
         private readonly AppDbContext _context;
 
         public MoviesApiController(AppDbContext context)
         {
             _context = context;
         }
+       
         // GET /api/moviesapi
         [HttpGet("GetMovies")]
         public IEnumerable<Movie> GetMovies()

@@ -6,6 +6,8 @@ using Vidly.Models;
 using Vidly.Models.VM;
 using Vidly.Migrations;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Vidly.Controllers
 {
@@ -24,11 +26,12 @@ namespace Vidly.Controllers
         {
             _appDbContext.Dispose();
         }
-
+       
         public ActionResult Index()
         {
             return View();
         }
+        //[Authorize(AuthenticationSchemes = "Cookies")]
         public ActionResult New()
         {
             var membereshipType = _appDbContext.MembershipTypes.ToList();

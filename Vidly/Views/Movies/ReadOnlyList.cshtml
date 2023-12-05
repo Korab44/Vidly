@@ -1,0 +1,76 @@
+﻿@model List<Movie>
+
+
+@{
+    ViewData["Title"] = "Movie";
+}
+
+<h2>Movies</h2>
+
+
+<table id="movies" class="table table-brodered table-dark table-hover">
+    <thead>
+        <tr>
+            <th style="color: beige"><b>Movie</b></th>
+            <th style="color: beige"><b>Genre</b></th>
+         
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var table = $("#movies").DataTable({
+                ajax: {
+                    url: "/api/moviesapi/GetMovies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                        
+                    },
+                    {
+                        data: "movieGenre",
+                        render: function (data) {
+                            var genre = "";
+                            switch (data) {
+                                case 0:
+                                    genre = "Action";
+                                    break;
+                                case 1:
+                                    genre = "Comedy";
+                                    break;
+                                case 2:
+                                    genre = "Thriller";
+                                    break;
+                                case 3:
+                                    genre = "Drama";
+                                    break;
+                                case 4:
+                                    genre = "Documentary";
+                                    break;
+                                case 5:
+                                    genre = "Horror";
+                                    break;
+                                case 6:
+                                    genre = "Cartoon";
+                                    break;
+                            }
+                            return genre;
+                        }
+                    }
+                ]
+
+            });
+
+       
+        });
+
+
+    </script>
+}

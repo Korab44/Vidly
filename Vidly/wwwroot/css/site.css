@@ -33,6 +33,6 @@ body {
 #customers td, #movies td {
     padding: 1.5rem;
 }
-
-
-
+li {
+    list-style-type: none;
+}

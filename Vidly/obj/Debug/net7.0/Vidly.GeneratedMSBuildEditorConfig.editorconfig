@@ -16,6 +16,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\_Projektet\Vidly\Vidly
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/_Projektet/Vidly/Vidly/Views/Account/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dJbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_Projektet/Vidly/Vidly/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_Projektet/Vidly/Vidly/Views/Account/RegisterCompleted.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3RlckNvbXBsZXRlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/_Projektet/Vidly/Vidly/Views/Home/CustomerForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDdXN0b21lckZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -36,12 +48,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/_Projektet/Vidly/Vidly/Views/Movies/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEluZGV4LmNzaHRtbA==
+[C:/_Projektet/Vidly/Vidly/Views/Movies/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/_Projektet/Vidly/Vidly/Views/Movies/Random.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFJhbmRvbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_Projektet/Vidly/Vidly/Views/Movies/ReadOnlyList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFJlYWRPbmx5TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/_Projektet/Vidly/Vidly/Views/Shared/Error.cshtml]
