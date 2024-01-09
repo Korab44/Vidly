@@ -8,6 +8,9 @@ using Vidly.Migrations;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.Extensions.Caching.Memory;
+using System.Runtime.Caching;
 
 namespace Vidly.Controllers
 {
@@ -26,7 +29,8 @@ namespace Vidly.Controllers
         {
             _appDbContext.Dispose();
         }
-       
+
+        [ResponseCache(Duration = 50)]
         public ActionResult Index()
         {
             return View();
@@ -113,6 +117,12 @@ namespace Vidly.Controllers
         //}
         public ActionResult Movies()
         {
+            if (System.Runtime.Caching.MemoryCache.Default["Genres"] == null)
+            {
+                System.Runtime.Caching.MemoryCache.Default["Genres"] = _appDbContext.Genres.ToList();
+            }
+
+            var geres = System.Runtime.Caching.MemoryCache.Default["Genres"] as IEnumerable<Genres>;
             return View();
         }
 

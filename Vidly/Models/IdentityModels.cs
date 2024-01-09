@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static Vidly.Models.Movie;
 
 namespace Vidly.Models
 {
@@ -11,6 +12,7 @@ namespace Vidly.Models
         public string Phone { get; set; }
         public string DrivingLicense {  get; set; }
         public string FullName { get; set; }
+        
 
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         //{

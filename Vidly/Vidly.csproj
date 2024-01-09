@@ -5,13 +5,18 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RepositoryUrl>https://localhost:7288</RepositoryUrl>
-    <PackageProjectUrl>https://localhost:7288</PackageProjectUrl>
+    <PackageProjectUrl>https://localhost:5138</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
 	  
 <PackageReference Include="bootbox" Version="4.3.0" />
 <PackageReference Include="Bootbox.JS" Version="5.5.2" />
+<PackageReference Include="Glimpse" Version="1.8.6" />
+<PackageReference Include="Glimpse.AspNet" Version="1.9.2" />
+<PackageReference Include="Glimpse.EF6" Version="1.6.5" />
+<PackageReference Include="Glimpse.Mvc5" Version="1.5.3" />
+<PackageReference Include="Glimpse.WebForms" Version="1.1.1" />
 <PackageReference Include="jQuery" Version="1.12.4" />
     <PackageReference Include="automapper" Version="4.1.0" />
     <PackageReference Include="jquery.datatables" Version="1.10.15" />
@@ -35,6 +40,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Optivem.Framework.Infrastructure.FluentValidation" Version="1.0.23" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
 

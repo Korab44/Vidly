@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Hosting;
 
 
 internal class Program
@@ -21,19 +22,15 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
         
         // Add services to the container.
         Mapper.Initialize(c => c.AddProfile<MappingProfile>());
-
 
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("Lidhja")
         ));
-
-
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
        .AddEntityFrameworkStores<AppDbContext>()
@@ -43,44 +40,24 @@ internal class Program
         builder.Services.AddScoped<SignInManager<ApplicationUser>>();
         builder.Services.AddScoped<AppDbContext>();
 
-
-
-        // Existing code...
-
-
         builder.Host.ConfigureServices((hostContext, services) =>
         {
-
             //services.AddControllers(options =>
             //{
             //    options.Filters.Add<Vidly.Helpers.CustomAuthorizeFilter>();
             //});
-
-
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/Account/LogIn"; // Specify the login path here
                     options.AccessDeniedPath = "/"; // Specify the home page path here
                 });
+            // Session service configurations...
+            //services.AddDistributedMemoryCache();
+           
 
-            // Add other services to the container
-            // ...
         });
-
-        // configure SSL
-        builder.WebHost.ConfigureKestrel((context, options) =>
-        {
-            options.ListenAnyIP(443, listenOptions =>
-            {
-                listenOptions.UseHttps();
-            });
-        });
-
-
-
         builder.Services.AddMemoryCache();
-
 
         var app = builder.Build();
 
@@ -120,12 +97,7 @@ internal class Program
             defaults: new { controller = "Homes", action = "GetCustomers" }
         );
 
-
         app.MapControllers();
-
-
-
-
 
         app.Run();
     }

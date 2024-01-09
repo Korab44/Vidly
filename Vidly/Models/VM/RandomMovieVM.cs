@@ -4,6 +4,8 @@
     {
         public Movie Movies { get; set; }
         public List<Customer> Customers { get; set; }
+
+        public List<Genres> Genres { get; set; }
         //public bool isNewMovie { get; set; }
     }
 }

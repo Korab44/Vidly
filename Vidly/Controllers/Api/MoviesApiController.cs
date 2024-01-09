@@ -11,9 +11,10 @@ namespace Vidly.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class MoviesApiController : ControllerBase
     {
-        [Authorize(Roles = UserRoles.Admin, AuthenticationSchemes = "Cookies")]
+
         private readonly AppDbContext _context;
 
         public MoviesApiController(AppDbContext context)

@@ -7,7 +7,7 @@ using Vidly.Models;
 using Microsoft.AspNetCore.Builder;
 using Vidly.Models.VM;
 using System.Threading.Tasks;
-
+using static Vidly.Models.Movie;
 
 namespace Vidly.Data
 {
@@ -37,7 +37,10 @@ namespace Vidly.Data
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Genres> Genres { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
+       
+      
 
         public static void Seed(IApplicationBuilder applicationBuilder)
         {

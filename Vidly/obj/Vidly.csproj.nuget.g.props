@@ -23,5 +23,11 @@
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\KorabM\.nuget\packages\microsoft.entityframeworkcore.tools\7.0.13</PkgMicrosoft_EntityFrameworkCore_Tools>
     <PkgjQuery Condition=" '$(PkgjQuery)' == '' ">C:\Users\KorabM\.nuget\packages\jquery\1.12.4</PkgjQuery>
+    <PkgGlimpse Condition=" '$(PkgGlimpse)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse\1.8.6</PkgGlimpse>
+    <PkgGlimpse_AspNet Condition=" '$(PkgGlimpse_AspNet)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse.aspnet\1.9.2</PkgGlimpse_AspNet>
+    <PkgGlimpse_WebForms Condition=" '$(PkgGlimpse_WebForms)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse.webforms\1.1.1</PkgGlimpse_WebForms>
+    <PkgGlimpse_Mvc5 Condition=" '$(PkgGlimpse_Mvc5)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse.mvc5\1.5.3</PkgGlimpse_Mvc5>
+    <PkgGlimpse_Ado Condition=" '$(PkgGlimpse_Ado)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse.ado\1.7.3</PkgGlimpse_Ado>
+    <PkgGlimpse_EF6 Condition=" '$(PkgGlimpse_EF6)' == '' ">C:\Users\KorabM\.nuget\packages\glimpse.ef6\1.6.5</PkgGlimpse_EF6>
   </PropertyGroup>
 </Project>

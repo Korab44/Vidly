@@ -10,7 +10,7 @@ using Vidly.Models.VM;
 namespace Vidly.Controllers
 {
     //[Authorize(AuthenticationSchemes = "Cookies")]
-    
+
     public class Movies : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -19,14 +19,15 @@ namespace Vidly.Controllers
         {
             _appDbContext = appDbContext;
         }
-        
+
         public IActionResult Index()
         {
+
             if (User.IsInRole(UserRoles.Admin))
                 return View("List");
-             return View("ReadOnlyList");
+            return View("ReadOnlyList");
         }
-        [Authorize(Roles = UserRoles.Admin, AuthenticationSchemes = "Cookies")]
+        [Authorize(Roles = UserRoles.Admin)]
         // the commented method here in New method code is another method with boolean value to show different titles in the beggining of page 
         public IActionResult New(/*RandomMovieVM movie*/)
         {
@@ -35,17 +36,19 @@ namespace Vidly.Controllers
             ViewBag.Message = "New Movie";
             return View("CustomFormMovie"/*, movie*/);
         }
+        [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Edit(int id)
         {
-            var movie = _appDbContext.Movies.FirstOrDefault(c => c.Id == id);
 
+            var movie = _appDbContext.Movies.FirstOrDefault(c => c.Id == id);
+            var viewModel = new RandomMovieVM
+            {
+                Movies = movie,
+
+            };
             if (movie != null)
             {
-                var viewModel = new RandomMovieVM
-                {
-                    Movies = movie,
 
-                };
                 ViewBag.Messages = "Edit Movie";
                 return View("CustomFormMovie", viewModel);
             }
@@ -54,8 +57,12 @@ namespace Vidly.Controllers
                 return NotFound();
             }
         }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Save(RandomMovieVM movie)
 
         {

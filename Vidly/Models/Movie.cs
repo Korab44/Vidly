@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static Vidly.Models.Genres;
 
 namespace Vidly.Models
 {
@@ -16,16 +17,7 @@ namespace Vidly.Models
 
      
 
-        public enum Genre
-        {
-            Action,
-            Comedy,
-            Thriller,
-            Drama,
-            Documentary,
-            Horror,
-            Cartoon
-        }
+      
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Vidly.Models.VM.RandomMovieVM
+﻿@model Vidly.Models.VM.RandomMovieVM;
 
 @{
     ViewData["Title"] = "New Movie";
@@ -26,7 +26,7 @@
     <div class="form-group mb-3">
         <label asp-for="@Model.Movies.MovieGenre">Genre</label>
         @Html.DropDownListFor(m => m.Movies.MovieGenre,
-        new SelectList(Enum.GetValues(typeof(Movie.Genre))), "-- Select Genre --",
+        new SelectList(Enum.GetValues(typeof(Genres))), "-- Select Genre --",
         new { @class = "form-control" })
         <span asp-validation-for="@Model.Movies.MovieGenre" class="text-danger"></span>
     </div>
