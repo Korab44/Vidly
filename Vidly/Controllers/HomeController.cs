@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.Caching.Memory;
 using System.Runtime.Caching;
+using static Vidly.Models.Movie;
+using Vidly.Models.Roles;
 
 namespace Vidly.Controllers
 {
@@ -33,78 +35,97 @@ namespace Vidly.Controllers
         [ResponseCache(Duration = 50)]
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(UserRoles.Admin))
+                return View("Index");
+            return View("ReadOnlyIndex");
         }
         //[Authorize(AuthenticationSchemes = "Cookies")]
         public ActionResult New()
         {
-            var membereshipType = _appDbContext.MembershipTypes.ToList();
-            var viewModel = new CustomerFormVM
+            if (User.IsInRole(UserRoles.Admin))
             {
-                Customers = new Customer(),
-                MembershipTypes = membereshipType
-            };
-            return View("CustomerForm", viewModel);
+                var membereshipType = _appDbContext.MembershipTypes.ToList();
+                var viewModel = new CustomerFormVM
+                {
+                    Customers = new Customer(),
+                    MembershipTypes = membereshipType
+                };
+                return View("CustomerForm", viewModel);
+            }
+            else
+            {
+                return View("NeedToBeAdmin");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Save(CustomerFormVM model)
         {
-            var customer = model.Customers; // Retrieve the customer object from the model
-            try
-            {   
-
-                if (customer.Id == 0)
+           
+          
+                var customer = model.Customers; // Retrieve the customer object from the model
+                try
                 {
+
+                    if (customer.Id == 0)
+                    {
                         _appDbContext.Customers.Add(customer);
+                    }
+                    else
+                    {
+                        var customerInDb = _appDbContext.Customers.Single(c => c.Id == customer.Id);
+                        customerInDb.Name = customer.Name;
+
+                        customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                        customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+                        customerInDb.Birthday = customer.Birthday;
+
+                        _appDbContext.Customers.Update(customerInDb);
+                    }
+
+                    _appDbContext.SaveChanges();
+                    return RedirectToAction("Index", "Home");
                 }
-                else
+                catch (Exception ex)
                 {
-                    var customerInDb = _appDbContext.Customers.Single(c => c.Id == customer.Id);
-                    customerInDb.Name = customer.Name;
+                    var modelVM = new CustomerFormVM
+                    {
+                        Customers = model.Customers,
+                        MembershipTypes = _appDbContext.MembershipTypes.ToList()
+                    };
 
-                    customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                    customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
-                    customerInDb.Birthday = customer.Birthday;
 
-                    _appDbContext.Customers.Update(customerInDb);
+                    return View("CustomerForm", modelVM);
+
                 }
-                
-                _appDbContext.SaveChanges();
-                return RedirectToAction("Index", "Home");
             }
-            catch (Exception ex)
-            {
-                var modelVM = new CustomerFormVM
-                {
-                    Customers = model.Customers,
-                    MembershipTypes = _appDbContext.MembershipTypes.ToList()
-                };
 
-
-                return View("CustomerForm", modelVM);
-                
-            }
-        }
 
         public ActionResult Edit(int id)
         {
-            var customer = _appDbContext.Customers
-            .FirstOrDefault(c => c.Id == id);
-
-            var viewModel = new CustomerFormVM()
+            if (!User.IsInRole(UserRoles.Admin))
             {
-                Customers = customer,
-                MembershipTypes = _appDbContext.MembershipTypes.ToList()
-            };
-
-            if (customer != null)
-            {
-                return View("CustomerForm", viewModel);
+                return View("NeedToBeAdmin");
             }
             else
             {
-                return NotFound();
+                var customer = _appDbContext.Customers
+                .FirstOrDefault(c => c.Id == id);
+
+                var viewModel = new CustomerFormVM()
+                {
+                    Customers = customer,
+                    MembershipTypes = _appDbContext.MembershipTypes.ToList()
+                };
+
+                if (customer != null)
+                {
+                    return View("CustomerForm", viewModel);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
         }
         //[HttpPost]
@@ -119,7 +140,7 @@ namespace Vidly.Controllers
         {
             if (System.Runtime.Caching.MemoryCache.Default["Genres"] == null)
             {
-                System.Runtime.Caching.MemoryCache.Default["Genres"] = _appDbContext.Genres.ToList();
+                System.Runtime.Caching.MemoryCache.Default["Genres"] = Genres.ToList();
             }
 
             var geres = System.Runtime.Caching.MemoryCache.Default["Genres"] as IEnumerable<Genres>;

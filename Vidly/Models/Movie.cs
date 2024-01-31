@@ -7,17 +7,13 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Genre MovieGenre { get; set; }
+        public Genre? MovieGenre { get; set; }
         [DataType(DataType.Date)]
-        public DateTime ReleaseDateTime { get; set; }
+        public DateTime? ReleaseDateTime { get; set; }
         public DateTime DateAdded { get; set; } = DateTime.Now;
 
         [Range(1, 20, ErrorMessage = "The field Number in Stock mut be between 1 and 20")]
-        public int StockNumber { get; set; }
-
-     
-
-      
-
+        public int? StockNumber { get; set; }
+        public int? NumberAvailable { get; set; }
     }
 }

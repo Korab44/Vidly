@@ -1,0 +1,51 @@
+﻿@model List<Customer>
+
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>Customers</h2>
+<h2>@DateTime.Now.ToString()</h2>
+
+<table id="customers" class="table table-brodered table-dark table-hover">
+        <thead>
+            <tr>
+                <th style="color: beige"><strong>Customer</strong></th>
+                <th style="color: beige"><strong>Membership</strong></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+ 
+
+        </tbody>
+    </table>
+
+
+@section scripts 
+{
+    <script>
+        $(document).ready(function () {
+          var table = $("#customers").DataTable({
+                ajax: {
+                    url: "/api/homes/GetCustomers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/home/edit/" + customer.id + "' class='text-light'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "membershipType.name"
+                    }
+                
+                ]
+            });
+        });
+    </script>
+
+}

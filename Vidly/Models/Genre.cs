@@ -2,10 +2,14 @@
 
 namespace Vidly.Models
 {
-    [NotMapped]
+
     public class Genres
     {
-       
+        internal static object ToList()
+        {
+            throw new NotImplementedException();
+        }
+
         public enum Genre
         {
             Action,

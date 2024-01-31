@@ -32,9 +32,10 @@ namespace Vidly.Controllers
         public IActionResult New(/*RandomMovieVM movie*/)
         {
             //movie.isNewMovie = true;
-
+            var rMovie = new RandomMovieVM();
+           
             ViewBag.Message = "New Movie";
-            return View("CustomFormMovie"/*, movie*/);
+            return View("CustomFormMovie", rMovie);
         }
         [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Edit(int id)

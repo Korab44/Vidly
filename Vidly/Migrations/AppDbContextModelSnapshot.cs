@@ -294,22 +294,54 @@ namespace Vidly.Migrations
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MovieGenre")
+                    b.Property<int?>("MovieGenre")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReleaseDateTime")
+                    b.Property<int?>("NumberAvailable")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReleaseDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StockNumber")
+                    b.Property<int?>("StockNumber")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("Vidly.Models.Rental", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RentalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RentalReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("Rental");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -372,6 +404,25 @@ namespace Vidly.Migrations
                         .IsRequired();
 
                     b.Navigation("MembershipType");
+                });
+
+            modelBuilder.Entity("Vidly.Models.Rental", b =>
+                {
+                    b.HasOne("Vidly.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vidly.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Movie");
                 });
 #pragma warning restore 612, 618
         }
